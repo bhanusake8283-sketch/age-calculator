@@ -1,0 +1,277 @@
+/* Make padding and borders count inside element width */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  /* Colourful animated background */
+  background: linear-gradient(-45deg, #ff6b6b, #feca57, #48dbfb, #a55eea);
+  background-size: 400% 400%;
+  animation: moveBackground 12s ease infinite;
+  /* perspective gives children a 3D depth effect */
+  perspective: 1000px;
+  overflow-x: hidden;
+}
+
+@keyframes moveBackground {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ---------- 3D floating cubes in the background ---------- */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  width: 90px;
+  height: 90px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  animation: floatCube 8s ease-in-out infinite;
+  z-index: 0;
+}
+
+body::before {
+  top: 8%;
+  left: 8%;
+}
+
+body::after {
+  bottom: 8%;
+  right: 8%;
+  width: 120px;
+  height: 120px;
+  animation-delay: -4s;
+}
+
+/* Rotates in 3D while floating up and down */
+@keyframes floatCube {
+  0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+  50%      { transform: translateY(-30px) rotateX(180deg) rotateY(180deg); }
+}
+
+/* ---------- The main card ---------- */
+.card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 28px 24px;
+  border-radius: 20px;
+  /* Layered shadows make the card look raised */
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.15),
+    0 30px 60px rgba(0, 0, 0, 0.25);
+  /* Slight 3D tilt, which straightens when you hover */
+  transform: rotateX(4deg);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.card:hover {
+  transform: rotateX(0deg) translateY(-6px);
+  box-shadow:
+    0 15px 25px rgba(0, 0, 0, 0.15),
+    0 40px 70px rgba(0, 0, 0, 0.3);
+}
+
+/* Gradient colored title */
+h1 {
+  margin: 0;
+  text-align: center;
+  font-size: 30px;
+  background: linear-gradient(90deg, #ff6b6b, #a55eea, #0abde3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  text-align: center;
+  color: #777;
+  margin: 6px 0 24px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #a55eea;
+}
+
+input[type="date"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #e0d4f7;
+  border-radius: 10px;
+  background: #faf7ff;
+  /* Inset shadow looks like the field is pressed into the card */
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+input[type="date"]:focus {
+  outline: none;
+  border-color: #a55eea;
+}
+
+.error {
+  color: #e74c3c;
+  min-height: 20px;
+  margin: 8px 0 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* ---------- 3D pressable buttons ---------- */
+.btn {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fff;
+  position: relative;
+  top: 0;
+  transition: top 0.1s, box-shadow 0.1s;
+}
+
+/* The solid colored shadow under each button looks like its thickness */
+.primary {
+  background: linear-gradient(135deg, #a55eea, #6c5ce7);
+  box-shadow: 0 6px 0 #4b3bb5, 0 10px 15px rgba(0, 0, 0, 0.25);
+}
+
+.secondary {
+  background: linear-gradient(135deg, #ff9f43, #ee5a24);
+  box-shadow: 0 6px 0 #b8400f, 0 10px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Button moves down when pressed, like a real 3D button */
+.primary:active {
+  top: 5px;
+  box-shadow: 0 1px 0 #4b3bb5, 0 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.secondary:active {
+  top: 5px;
+  box-shadow: 0 1px 0 #b8400f, 0 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* ---------- Result section ---------- */
+.result {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px dashed #e0d4f7;
+  text-align: center;
+}
+
+.result h2 {
+  margin: 0 0 16px;
+  color: #444;
+  font-size: 20px;
+}
+
+.age-boxes {
+  display: flex;
+  gap: 10px;
+}
+
+/* Each box flips in with a 3D rotation when the result appears */
+.box {
+  flex: 1;
+  padding: 16px 6px;
+  border-radius: 14px;
+  color: #fff;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.2), 0 12px 18px rgba(0, 0, 0, 0.2);
+  animation: flipIn 0.7s ease backwards;
+  transition: transform 0.3s;
+}
+
+.box:hover {
+  transform: translateY(-5px) rotateY(10deg);
+}
+
+/* Different color for years, months and days */
+.box:nth-child(1) {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+}
+
+.box:nth-child(2) {
+  background: linear-gradient(135deg, #1dd1a1, #10ac84);
+  animation-delay: 0.15s;
+}
+
+.box:nth-child(3) {
+  background: linear-gradient(135deg, #48dbfb, #0abde3);
+  animation-delay: 0.3s;
+}
+
+@keyframes flipIn {
+  from {
+    opacity: 0;
+    transform: rotateX(-90deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0deg);
+  }
+}
+
+.number {
+  display: block;
+  font-size: 32px;
+  font-weight: bold;
+  text-shadow: 0 3px 5px rgba(0, 0, 0, 0.25);
+}
+
+.label {
+  font-size: 14px;
+  opacity: 0.95;
+}
+
+.totals {
+  margin-top: 22px;
+  padding: 10px;
+  color: #444;
+  background: #fff8e1;
+  border-radius: 12px;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.06);
+}
+
+.totals p {
+  margin: 6px 0;
+}
+
+.totals strong {
+  color: #e67e22;
+}
+
+/* Used by JavaScript to show/hide the result */
+.hidden {
+  display: none;
+}
+
+/* Smaller text on very small phones */
+@media (max-width: 360px) {
+  .number {
+    font-size: 24px;
+  }
+}

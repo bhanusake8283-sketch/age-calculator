@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- This line makes the page fit properly on mobile screens -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="card">
+    <h1>Age Calculator</h1>
+    <p class="subtitle">Find out your exact age</p>
+
+    <!-- Date of birth input -->
+    <label for="dob">Date of Birth</label>
+    <input type="date" id="dob">
+
+    <!-- Error message (hidden until needed) -->
+    <p id="error" class="error"></p>
+
+    <!-- Buttons -->
+    <div class="buttons">
+      <button id="calculateBtn" class="btn primary">Calculate Age</button>
+      <button id="resetBtn" class="btn secondary">Reset</button>
+    </div>
+
+    <!-- Result section (hidden until an age is calculated) -->
+    <section id="result" class="result hidden">
+      <h2>Your Age</h2>
+
+      <div class="age-boxes">
+        <div class="box">
+          <span id="years" class="number">0</span>
+          <span class="label">Years</span>
+        </div>
+        <div class="box">
+          <span id="months" class="number">0</span>
+          <span class="label">Months</span>
+        </div>
+        <div class="box">
+          <span id="days" class="number">0</span>
+          <span class="label">Days</span>
+        </div>
+      </div>
+
+      <div class="totals">
+        <p>Total completed months: <strong id="totalMonths">0</strong></p>
+        <p>Total days elapsed: <strong id="totalDays">0</strong></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
