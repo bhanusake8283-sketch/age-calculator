@@ -62,6 +62,57 @@
     </section>
   </main>
 
+    <!-- ================= TAB 2: AGE GAP ================= -->
+    <section id="gapPanel" class="hidden">
+      <p class="subtitle">Find the age gap between two people</p>
+
+      <!-- Person A -->
+      <label for="nameA">Person A name (optional)</label>
+      <input type="text" id="nameA" placeholder="Person A">
+      <label for="dobA" class="space">Person A date of birth</label>
+      <input type="date" id="dobA">
+
+      <!-- Person B -->
+      <label for="nameB" class="space">Person B name (optional)</label>
+      <input type="text" id="nameB" placeholder="Person B">
+      <label for="dobB" class="space">Person B date of birth</label>
+      <input type="date" id="dobB">
+
+      <p id="gapError" class="error"></p>
+
+      <div class="buttons">
+        <button id="gapBtn" class="btn primary">Find Age Gap</button>
+        <button id="gapResetBtn" class="btn secondary">Reset</button>
+      </div>
+
+      <!-- Result (hidden until the gap is calculated) -->
+      <section id="gapResult" class="result hidden">
+        <h2>Age Gap</h2>
+        <p id="gapSentence" class="sentence"></p>
+
+        <div class="age-boxes">
+          <div class="box">
+            <span id="gapYears" class="number">0</span>
+            <span class="label">Years</span>
+          </div>
+          <div class="box">
+            <span id="gapMonths" class="number">0</span>
+            <span class="label">Months</span>
+          </div>
+          <div class="box">
+            <span id="gapDays" class="number">0</span>
+            <span class="label">Days</span>
+          </div>
+        </div>
+
+        <div class="totals">
+          <p>Total gap in days: <strong id="gapTotalDays">0</strong></p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+
   <script src="script.js"></script>
 </body>
 </html>
